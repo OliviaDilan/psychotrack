@@ -5,6 +5,7 @@ import svelte from "rollup-plugin-svelte";
 import babel from "rollup-plugin-babel";
 import { terser } from "rollup-plugin-terser";
 import config from "sapper/config/rollup.js";
+import sveltePreprocess from "svelte-preprocess";
 import pkg from "./package.json";
 import dotenv from "dotenv";
 
@@ -15,6 +16,8 @@ const dev = mode === "development";
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 const apiBaseUrl = process.env.API_BASE_URL || "http://localhost:5000";
 const sessionSecret = process.env.SESSION_SECRET || "yoursessionsecretkey";
+
+const preprocess = sveltePreprocess({ postcss: true });
 
 const onwarn = (warning, onwarn) =>
   (warning.code === "CIRCULAR_DEPENDENCY" &&
@@ -35,6 +38,7 @@ export default {
         "process.env.SESSION_SECRET": JSON.stringify(sessionSecret),
       }),
       svelte({
+        preprocess,
         dev,
         hydratable: true,
         emitCss: true,
