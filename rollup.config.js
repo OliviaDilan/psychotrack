@@ -92,6 +92,7 @@ export default {
         "process.env.API_BASE_URL": JSON.stringify(apiBaseUrl),
       }),
       svelte({
+        preprocess,
         generate: "ssr",
         dev,
       }),

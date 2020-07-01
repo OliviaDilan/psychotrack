@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-  <title>Svelte News App</title>
+  <title>PsychoTrack</title>
 </svelte:head>
 
 <div class="homepage page">
